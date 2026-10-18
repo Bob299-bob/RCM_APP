@@ -1,59 +1,68 @@
-# RcmAPP
+# US Healthcare Revenue Cycle Management (RCM) Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.39.
+A frontend demo application built as a learning project to explore the US Healthcare Revenue Cycle Management (RCM) workflow and understand how its different stages connect.
 
-## Development server
+While studying the RCM process, I became curious about how these workflows could be represented in a web application, so I decided to build a small demo project.
 
-To start a local development server, run:
+## 🔗 Live Demo
 
-```bash
-ng serve
-```
+[Open US Healthcare RCM Application](https://rcmapp3.vercel.app/login)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Technologies Used
 
-## Code scaffolding
+- Angular
+- TypeScript
+- HTML5
+- CSS3
+- Bootstrap
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📌 Application Modules
 
-```bash
-ng generate component component-name
-```
+The application covers the following RCM workflow areas:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. Patient Management
+2. Insurance Management
+3. Eligibility & Benefits Verification
+4. Authorization Management
+5. Patient Encounter Management
+6. Charge Capture
+7. Medical Coding
+8. Claim Creation & Management
+9. Claim Scrubbing & Validation
+10. Claim Submission
+11. Claim Adjudication
+12. Payment Posting (ERA/EOB)
+13. Denial Management & Appeals
+14. Patient Billing & Responsibility
+15. Accounts Receivable (AR) Management
+16. HIPAA-Related Audit & Security Concepts
 
-```bash
-ng generate --help
-```
+## 🎯 Project Objective
 
-## Building
+The objective is to understand the US Healthcare RCM lifecycle and demonstrate its major workflows through an interactive frontend application.
 
-To build the project run:
+This project has also helped me practice Angular development, component-based architecture, routing, services, form handling, and UI design.
 
-```bash
-ng build
-```
+## ⚠️ Current Scope & Limitations
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This is a frontend learning prototype, not a production-ready healthcare application.
 
-## Running unit tests
+- Uses fictional demo data.
+- Backend and database integration are not implemented.
+- Login is for demonstration purposes and does not provide real authentication.
+- Insurance verification, claim submission, adjudication, and payment processing are simulated.
+- AI-based automation is a possible future enhancement, not an implemented feature.
+- HIPAA-related requirements were explored for learning purposes. The application has not been independently validated or certified for HIPAA compliance.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🚀 Future Scope
 
-```bash
-ng test
-```
+- Backend and database integration.
+- Secure authentication and role-based access.
+- More realistic RCM workflow validation.
+- Exploration of AI-assisted claim validation and denial analysis.
 
-## Running end-to-end tests
+## 📚 Learning Outcome
 
-For end-to-end (e2e) testing, run:
+This project is helping me connect technical development with healthcare domain knowledge and understand how multiple business workflows can be organized into a single application.
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Built for learning, exploration, and practical development experience.**
