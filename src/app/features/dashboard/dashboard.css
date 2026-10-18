@@ -1,0 +1,11 @@
+
+:host { display: block; }
+.dashboard-content { padding: 24px; }
+.dashboard-content h2 { color: #1e3a5f; font-weight: 700; }
+.dashboard-cards { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 18px; margin: 22px 0; }
+.dashboard-cards .card { background: white; padding: 22px; border: 1px solid #e5eaf1; border-radius: 12px; box-shadow: 0 4px 14px #0f172a0d; transition: .2s; }
+.dashboard-cards .card:hover { transform: translateY(-4px); }
+.dashboard-cards h4 { color: #64748b; font-size: 14px; }
+.dashboard-cards h2 { color: #2563eb; font-size: 27px; }
+@media(max-width:992px) { .dashboard-cards { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:576px) { .dashboard-content { padding: 12px; } .dashboard-cards { grid-template-columns: 1fr; } }

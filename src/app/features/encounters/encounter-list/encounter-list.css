@@ -1,0 +1,176 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.container-fluid {
+  padding: 24px;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+.container-fluid > h2 {
+  color: #1e3a5f;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.container-fluid > p {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.container-fluid > .card {
+  background: #fff;
+  border: 1px solid #e8edf5;
+  border-radius: 12px;
+  padding: 24px !important;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, .05);
+}
+
+.container-fluid .card h4 {
+  color: #1e3a5f;
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #e8edf5;
+}
+
+.container-fluid label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.container-fluid .form-control,
+.container-fluid .form-select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  transition: .2s ease;
+}
+
+.container-fluid .form-control:focus,
+.container-fluid .form-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.container-fluid textarea.form-control {
+  min-height: 100px;
+}
+
+.container-fluid .btn {
+  padding: 10px 20px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .2s ease;
+}
+
+.container-fluid .btn-primary {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.container-fluid .btn-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.container-fluid .btn-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.container-fluid .btn-danger {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.container-fluid .btn-danger:hover {
+  background: #dc2626;
+  color: #fff;
+}
+
+.container-fluid .card p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.container-fluid .card p strong {
+  color: #2563eb;
+  font-size: 18px;
+}
+
+.container-fluid .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.container-fluid .table {
+  width: 100%;
+  min-width: 950px;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+.container-fluid .table thead th {
+  background: #eef5ff;
+  color: #1e3a5f;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 15px 12px;
+  white-space: nowrap;
+}
+
+.container-fluid .table tbody td {
+  color: #475569;
+  font-size: 13px;
+  padding: 13px 12px;
+  white-space: nowrap;
+}
+
+.container-fluid .table tbody tr:hover {
+  background: #f5f9ff;
+}
+
+@media (max-width: 992px) {
+  .container-fluid {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    padding: 12px;
+  }
+
+  .container-fluid > h2 {
+    font-size: 21px;
+  }
+
+  .container-fluid > .card {
+    padding: 15px !important;
+  }
+
+  .container-fluid .card h4 {
+    font-size: 17px;
+  }
+
+  .container-fluid .btn {
+    padding: 9px 13px;
+  }
+
+  .container-fluid .table {
+    min-width: 850px;
+  }
+}

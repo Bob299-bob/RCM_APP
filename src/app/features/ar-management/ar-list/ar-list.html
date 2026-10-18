@@ -1,0 +1,164 @@
+<div class="container-fluid">
+  <div class="mb-4">
+    <h2>AR Management & Final Resolution</h2>
+    <p class="text-muted">Track outstanding balances and patient follow-ups.</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card summary-card">
+        <h6>Open AR Records</h6>
+        <h3>{{ arService.getOpenRecords().length }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card summary-card">
+        <h6>Resolved Records</h6>
+        <h3>{{ arService.getResolvedRecords().length }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card summary-card">
+        <h6>Total Outstanding</h6>
+        <h3>₹{{ arService.getTotalOutstanding() }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add AR Record -->
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3">Add AR Follow-up</h5>
+
+    <form (ngSubmit)="addARRecord()">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Select Patient Bill</label>
+
+          <select class="form-select" name="billId" [(ngModel)]="billId" required>
+            <option [ngValue]="null">Select Bill</option>
+
+            <option *ngFor="let bill of getAvailableBills()" [ngValue]="bill.id">
+              {{ bill.claimNumber }} - {{ bill.patientName }} (₹{{ bill.patientResponsibility }})
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Follow-up Date</label>
+          <input
+            type="date"
+            class="form-control"
+            name="followUpDate"
+            [(ngModel)]="followUpDate"
+            required
+          />
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Aging Bucket</label>
+
+          <select class="form-select" name="agingBucket" [(ngModel)]="agingBucket">
+            <option>0-30 Days</option>
+            <option>31-60 Days</option>
+            <option>61-90 Days</option>
+            <option>90+ Days</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Status</label>
+
+          <select class="form-select" name="status" [(ngModel)]="status">
+            <option>Open</option>
+            <option>Follow-up</option>
+            <option>Disputed</option>
+            <option>Resolved</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Follow-up Notes</label>
+          <textarea
+            class="form-control"
+            rows="3"
+            name="notes"
+            [(ngModel)]="notes"
+            placeholder="Enter follow-up details"
+          ></textarea>
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Add AR Record</button>
+        </div>
+      </div>
+    </form>
+
+    <p class="text-success mt-3" *ngIf="message">
+      {{ message }}
+    </p>
+  </div>
+
+  <!-- AR Records Table -->
+  <div class="card p-4">
+    <h5 class="mb-3">AR Records</h5>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>Claim Number</th>
+            <th>Patient</th>
+            <th>Payer</th>
+            <th>Balance</th>
+            <th>Due Date</th>
+            <th>Follow-up Date</th>
+            <th>Aging</th>
+            <th>Status</th>
+            <th>Notes</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let record of arService.getRecords()">
+            <td>{{ record.claimNumber }}</td>
+            <td>{{ record.patientName }}</td>
+            <td>{{ record.payerName }}</td>
+            <td>₹{{ record.balance }}</td>
+            <td>{{ record.dueDate }}</td>
+            <td>{{ record.followUpDate }}</td>
+            <td>{{ record.agingBucket }}</td>
+
+            <td>
+              <select
+                class="form-select form-select-sm"
+                [ngModel]="record.status"
+                (ngModelChange)="updateStatus(record, $event)"
+              >
+                <option>Open</option>
+                <option>Follow-up</option>
+                <option>Disputed</option>
+                <option>Resolved</option>
+              </select>
+            </td>
+
+            <td>{{ record.notes }}</td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" type="button" (click)="deleteRecord(record.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="arService.getRecords().length === 0">
+            <td colspan="10" class="text-center text-muted">No AR records found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

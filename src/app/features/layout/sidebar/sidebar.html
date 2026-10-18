@@ -1,0 +1,120 @@
+<div class="mobile-menu">
+  <button class="menu-btn" (click)="toggleMenu()">☰</button>
+
+  <h3>RCM Portal</h3>
+</div>
+
+<div class="sidebar" [class.open]="isOpen">
+  <h2>RCM Portal</h2>
+
+  <p class="menu-title">MAIN MENU</p>
+
+  <ul>
+    <li>
+      <a routerLink="/dashboard" (click)="toggleMenu()">
+        <i class="bi bi-speedometer2"></i>
+        Dashboard
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/patients" (click)="closeMenu()">
+        <i class="bi bi-people"></i>
+        Patients
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/insurance" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-shield-check"></i>
+        Insurance
+      </a>
+    </li>
+    <li>
+      <a routerLink="/eligibility" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-clipboard-check"></i>
+        Eligibility & Benefits
+      </a>
+    </li>
+    <li>
+      <a routerLink="/authorization" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-file-earmark-check"></i>
+        Authorization
+      </a>
+    </li>
+    <li>
+      <a routerLink="/encounters" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-calendar-check"></i>
+        Patient Encounters
+      </a>
+    </li>
+    <li>
+      <a routerLink="/charges" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-receipt"></i>
+        Charge Capture
+      </a>
+    </li>
+    <li>
+      <a routerLink="/coding" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-clipboard2-pulse"></i>
+        Medical Coding
+      </a>
+    </li>
+    <li>
+      <a routerLink="/claims" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-file-earmark-text"></i>
+        Claim Management
+      </a>
+    </li>
+    <li>
+      <a routerLink="/scrubbing" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-shield-check"></i>
+        Claim Scrubbing
+      </a>
+    </li>
+    <li>
+      <a routerLink="/submission" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-send"></i>
+        Claim Submission
+      </a>
+    </li>
+    <li>
+      <a routerLink="/adjudication" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-clipboard-check"></i>
+        Adjudication & Claim Status
+      </a>
+    </li>
+    <li>
+      <a routerLink="/payments" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-cash-stack"></i>
+        Payment Posting
+      </a>
+    </li>
+    <li>
+      <a routerLink="/denials" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-exclamation-triangle"></i>
+        Denial Management
+      </a>
+    </li>
+    <li>
+      <a routerLink="/billing" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-receipt"></i>
+        Patient Billing
+      </a>
+    </li>
+    <li>
+      <a routerLink="/ar-management" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-clock-history"></i>
+        AR Management
+      </a>
+    </li>
+    <li>
+      <a routerLink="/security" routerLinkActive="active" (click)="closeMenu()">
+        <i class="bi bi-shield-lock"></i>
+        HIPAA & Security
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="overlay" [class.show]="isOpen" (click)="toggleMenu()"></div>

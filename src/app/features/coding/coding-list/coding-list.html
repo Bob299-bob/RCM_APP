@@ -1,0 +1,165 @@
+<div class="coding-container">
+  <div class="page-heading">
+    <h2>Medical Coding</h2>
+    <p>Assign diagnosis and procedure codes to patient charges</p>
+  </div>
+
+  <!-- Coding Form -->
+
+  <div class="form-card">
+    <h3>Add Medical Coding</h3>
+
+    <form (ngSubmit)="addCoding()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Select Charge</label>
+
+          <select name="chargeId" [(ngModel)]="chargeId" required>
+            <option [ngValue]="null">Select Charge</option>
+
+            <option *ngFor="let charge of chargeService.getCharges()" [ngValue]="charge.id">
+              CHG-{{ charge.id }} - {{ charge.patientName }} -
+              {{ charge.serviceName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Diagnosis Name</label>
+
+          <input
+            type="text"
+            name="diagnosisName"
+            [(ngModel)]="diagnosisName"
+            placeholder="e.g. Essential hypertension"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>ICD-10 Code</label>
+
+          <input type="text" name="icdCode" [(ngModel)]="icdCode" placeholder="e.g. I10" required />
+        </div>
+
+        <div class="form-group">
+          <label>Procedure Name</label>
+
+          <input
+            type="text"
+            name="procedureName"
+            [(ngModel)]="procedureName"
+            placeholder="Enter procedure name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>CPT Code</label>
+
+          <input
+            type="text"
+            name="cptCode"
+            [(ngModel)]="cptCode"
+            placeholder="Enter CPT code"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Coding Date</label>
+
+          <input type="date" name="codingDate" [(ngModel)]="codingDate" required />
+        </div>
+
+        <div class="form-group">
+          <label>Coder Name</label>
+
+          <input
+            type="text"
+            name="coderName"
+            [(ngModel)]="coderName"
+            placeholder="Enter coder name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Coding Status</label>
+
+          <select name="status" [(ngModel)]="status">
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+            <option value="Needs Review">Needs Review</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>Notes</label>
+
+          <textarea
+            name="notes"
+            [(ngModel)]="notes"
+            rows="3"
+            placeholder="Enter coding notes"
+          ></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Save Coding</button>
+    </form>
+  </div>
+
+  <!-- Coding Records -->
+
+  <div class="table-card">
+    <h3>Coding Records</h3>
+
+    <p>Total Records: {{ codingService.getTotalCodings() }}</p>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Coding ID</th>
+            <th>Charge ID</th>
+            <th>Patient</th>
+            <th>Diagnosis</th>
+            <th>ICD-10</th>
+            <th>Procedure</th>
+            <th>CPT</th>
+            <th>Coding Date</th>
+            <th>Coder</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let coding of codingService.getCodings()">
+            <td>COD-{{ coding.id }}</td>
+            <td>CHG-{{ coding.chargeId }}</td>
+            <td>{{ coding.patientName }}</td>
+            <td>{{ coding.diagnosisName }}</td>
+            <td>{{ coding.icdCode }}</td>
+            <td>{{ coding.procedureName }}</td>
+            <td>{{ coding.cptCode }}</td>
+            <td>{{ coding.codingDate }}</td>
+            <td>{{ coding.coderName }}</td>
+            <td>{{ coding.status }}</td>
+
+            <td>
+              <button type="button" class="delete-btn" (click)="deleteCoding(coding.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="codingService.getCodings().length === 0">
+            <td colspan="11" class="no-data">No coding records found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,201 @@
+
+.container-fluid {
+  padding: 20px;
+  color: #263247;
+}
+
+/* Page Heading */
+.container-fluid > h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #243b63;
+  margin-bottom: 8px;
+}
+
+.container-fluid > p {
+  color: #718096;
+  margin-bottom: 25px;
+}
+
+/* Summary Cards */
+.container-fluid .row.mb-4 .card {
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.container-fluid .row.mb-4 .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.container-fluid .row.mb-4 h6 {
+  color: #718096;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.container-fluid .row.mb-4 h3 {
+  color: #16845b;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+/* Main Cards */
+.container-fluid > .card {
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+.container-fluid .card h4 {
+  color: #243b63;
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+/* Form Labels */
+.container-fluid .form-label {
+  color: #344054;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Form Controls */
+.container-fluid .form-control,
+.container-fluid .form-select {
+  min-height: 43px;
+  border: 1px solid #d7deea;
+  border-radius: 7px;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+.container-fluid .form-control:focus,
+.container-fluid .form-select:focus {
+  border-color: #16a36a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 106, 0.12);
+}
+
+.container-fluid .form-control[readonly] {
+  background: #f1f5f9;
+  color: #475467;
+  font-weight: 600;
+}
+
+/* Primary Button */
+.container-fluid .btn-primary {
+  background: #16845b;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 22px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.container-fluid .btn-primary:hover {
+  background: #116b49;
+}
+
+/* Delete Button */
+.container-fluid .btn-danger {
+  background: #dc3545;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.container-fluid .btn-danger:hover {
+  background: #b02a37;
+}
+
+/* Table */
+.container-fluid .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.container-fluid .table {
+  min-width: 1100px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+.container-fluid .table thead th {
+  background: #eaf7f1;
+  color: #176344;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 13px 12px;
+}
+
+.container-fluid .table tbody td {
+  padding: 12px;
+  color: #475467;
+  white-space: nowrap;
+}
+
+.container-fluid .table tbody tr:hover {
+  background: #f3fbf7;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .container-fluid {
+    padding: 15px;
+  }
+
+  .container-fluid > h2 {
+    font-size: 23px;
+  }
+
+  .container-fluid .table {
+    min-width: 1050px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .container-fluid {
+    padding: 10px;
+  }
+
+  .container-fluid > h2 {
+    font-size: 20px;
+  }
+
+  .container-fluid > p {
+    font-size: 13px;
+  }
+
+  .container-fluid .card {
+    padding: 15px !important;
+  }
+
+  .container-fluid .card h4 {
+    font-size: 17px;
+  }
+
+  .container-fluid .row.mb-4 h3 {
+    font-size: 23px;
+  }
+
+  .container-fluid .btn-primary {
+    width: 100%;
+  }
+
+  .container-fluid .table {
+    min-width: 1000px;
+  }
+}

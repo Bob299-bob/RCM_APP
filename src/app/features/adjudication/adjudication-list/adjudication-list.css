@@ -1,0 +1,250 @@
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Main Container */
+.container-fluid {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  background: #f5f7fb;
+}
+
+.container-fluid > h2 {
+  color: #1e3a5f;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.container-fluid > p {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Summary Cards */
+.container-fluid .row.mb-4 .card {
+  height: 100%;
+  min-height: 115px;
+  padding: 20px !important;
+  background: #ffffff;
+  border: 1px solid #e8edf5;
+  border-left: 4px solid #2563eb;
+  border-radius: 11px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, .05);
+  transition: .25s ease;
+}
+
+.container-fluid .row.mb-4 .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 7px 18px rgba(15, 23, 42, .09);
+}
+
+.container-fluid .row.mb-4 .card h6 {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.container-fluid .row.mb-4 .card h3 {
+  color: #1e3a5f;
+  font-size: 27px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Form and Table Cards */
+.container-fluid > .card {
+  background: #ffffff;
+  border: 1px solid #e8edf5;
+  border-radius: 12px;
+  padding: 24px !important;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, .05);
+  transition: .3s ease;
+}
+
+.container-fluid > .card:hover {
+  box-shadow: 0 7px 20px rgba(15, 23, 42, .08);
+}
+
+.container-fluid > .card h4 {
+  color: #1e3a5f;
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #e8edf5;
+}
+
+/* Form Labels */
+.container-fluid .form-label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Input Fields */
+.container-fluid .form-control,
+.container-fluid .form-select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #334155;
+  background: #ffffff;
+  font-size: 14px;
+  transition: .25s ease;
+}
+
+.container-fluid .form-control:focus,
+.container-fluid .form-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.container-fluid .form-control::placeholder {
+  color: #94a3b8;
+}
+
+/* Buttons */
+.container-fluid .btn {
+  padding: 10px 19px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .25s ease;
+}
+
+.container-fluid .btn-primary {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.container-fluid .btn-primary:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(37, 99, 235, .2);
+}
+
+.container-fluid .btn-danger {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.container-fluid .btn-danger:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Table */
+.container-fluid .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.container-fluid .table {
+  width: 100%;
+  min-width: 1150px;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+.container-fluid .table thead th {
+  background: #eef5ff;
+  color: #1e3a5f;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 15px 12px;
+  white-space: nowrap;
+  border-color: #e2e8f0;
+}
+
+.container-fluid .table tbody td {
+  color: #475569;
+  font-size: 13px;
+  padding: 13px 12px;
+  white-space: nowrap;
+  border-color: #edf0f5;
+}
+
+.container-fluid .table tbody tr {
+  transition: background .2s ease;
+}
+
+.container-fluid .table tbody tr:hover {
+  background: #f1f6ff;
+}
+
+/* Empty Table */
+.container-fluid .table .text-center {
+  color: #94a3b8;
+  padding: 25px;
+  font-weight: 500;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .container-fluid {
+    padding: 18px;
+  }
+
+  .container-fluid > .card {
+    padding: 20px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .container-fluid {
+    padding: 12px;
+  }
+
+  .container-fluid > h2 {
+    font-size: 21px;
+  }
+
+  .container-fluid > .card {
+    padding: 15px !important;
+    border-radius: 9px;
+  }
+
+  .container-fluid > .card h4 {
+    font-size: 17px;
+  }
+
+  .container-fluid .row.mb-4 .card {
+    min-height: 100px;
+  }
+
+  .container-fluid .row.mb-4 .card h3 {
+    font-size: 23px;
+  }
+
+  .container-fluid .form-control,
+  .container-fluid .form-select {
+    font-size: 13px;
+  }
+
+  .container-fluid .btn {
+    padding: 9px 13px;
+  }
+
+  .container-fluid .table {
+    min-width: 1100px;
+  }
+}

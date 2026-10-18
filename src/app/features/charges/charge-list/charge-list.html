@@ -1,0 +1,142 @@
+<div class="charge-container">
+  <div class="page-heading">
+    <h2>Charge Capture</h2>
+    <p>Record services and charges for patient encounters</p>
+  </div>
+
+  <div class="form-card">
+    <h3>Add New Charge</h3>
+
+    <form (ngSubmit)="addCharge()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Select Encounter</label>
+
+          <select name="encounterId" [(ngModel)]="encounterId" required>
+            <option [ngValue]="null">Select Encounter</option>
+
+            <option
+              *ngFor="let encounter of encounterService.getEncounters()"
+              [ngValue]="encounter.id"
+            >
+              ENC-{{ encounter.id }} -
+              {{ encounter.patientName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Service Name</label>
+          <input
+            type="text"
+            name="serviceName"
+            [(ngModel)]="serviceName"
+            placeholder="Enter service name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Procedure Code</label>
+          <input
+            type="text"
+            name="procedureCode"
+            [(ngModel)]="procedureCode"
+            placeholder="Enter CPT code"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" name="quantity" [(ngModel)]="quantity" min="1" required />
+        </div>
+
+        <div class="form-group">
+          <label>Unit Amount ($)</label>
+          <input type="number" name="amount" [(ngModel)]="amount" min="0.01" step="0.01" required />
+        </div>
+
+        <div class="form-group">
+          <label>Service Date</label>
+          <input type="date" name="serviceDate" [(ngModel)]="serviceDate" required />
+        </div>
+
+        <div class="form-group">
+          <label>Provider Name</label>
+          <input
+            type="text"
+            name="providerName"
+            [(ngModel)]="providerName"
+            placeholder="Enter provider name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Charge Status</label>
+          <select name="status" [(ngModel)]="status">
+            <option value="Pending">Pending</option>
+            <option value="Captured">Captured</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Save Charge</button>
+    </form>
+  </div>
+
+  <div class="table-card">
+    <h3>Charge Records</h3>
+
+    <p>Total Charges: {{ chargeService.getTotalCharges() }}</p>
+
+    <p>Total Amount: ${{ chargeService.getTotalAmount().toFixed(2) }}</p>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Charge ID</th>
+            <th>Encounter</th>
+            <th>Patient</th>
+            <th>Service</th>
+            <th>CPT Code</th>
+            <th>Quantity</th>
+            <th>Unit Amount</th>
+            <th>Total Amount</th>
+            <th>Date</th>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let charge of chargeService.getCharges()">
+            <td>CHG-{{ charge.id }}</td>
+            <td>ENC-{{ charge.encounterId }}</td>
+            <td>{{ charge.patientName }}</td>
+            <td>{{ charge.serviceName }}</td>
+            <td>{{ charge.procedureCode || '-' }}</td>
+            <td>{{ charge.quantity }}</td>
+            <td>${{ charge.amount }}</td>
+            <td>${{ charge.totalAmount.toFixed(2) }}</td>
+            <td>{{ charge.serviceDate }}</td>
+            <td>{{ charge.providerName }}</td>
+            <td>{{ charge.status }}</td>
+
+            <td>
+              <button type="button" class="delete-btn" (click)="deleteCharge(charge.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="chargeService.getCharges().length === 0">
+            <td colspan="12" class="no-data">No charge records found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

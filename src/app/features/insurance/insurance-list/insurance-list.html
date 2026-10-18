@@ -1,0 +1,135 @@
+<div class="insurance-container">
+  <div class="page-heading">
+    <h2>Insurance Management</h2>
+    <p>Manage patient insurance information</p>
+  </div>
+
+  <!-- Insurance Form -->
+
+  <div class="form-card">
+    <h3>Add Insurance Details</h3>
+
+    <form (ngSubmit)="addInsurance()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Select Patient</label>
+
+          <select name="patientId" [(ngModel)]="patientId" required>
+            <option [ngValue]="null">Select Patient</option>
+
+            <option *ngFor="let patient of patientService.getPatients()" [ngValue]="patient.id">
+              {{ patient.firstName }} {{ patient.lastName }} (PT-{{ patient.id }})
+            </option>
+          </select>
+
+          <small *ngIf="patientService.getPatients().length === 0">
+            Please register a patient first.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label>Insurance Provider</label>
+          <input
+            type="text"
+            name="providerName"
+            [(ngModel)]="providerName"
+            placeholder="e.g. Blue Cross Blue Shield"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Policy Number</label>
+          <input
+            type="text"
+            name="policyNumber"
+            [(ngModel)]="policyNumber"
+            placeholder="Enter policy number"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Group Number</label>
+          <input
+            type="text"
+            name="groupNumber"
+            [(ngModel)]="groupNumber"
+            placeholder="Enter group number"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Plan Type</label>
+          <select name="planType" [(ngModel)]="planType">
+            <option value="PPO">PPO</option>
+            <option value="HMO">HMO</option>
+            <option value="EPO">EPO</option>
+            <option value="POS">POS</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="date" name="startDate" [(ngModel)]="startDate" required />
+        </div>
+
+        <div class="form-group">
+          <label>End Date</label>
+          <input type="date" name="endDate" [(ngModel)]="endDate" required />
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Save Insurance</button>
+    </form>
+  </div>
+
+  <!-- Insurance Table -->
+
+  <div class="table-card">
+    <h3>Insurance Records</h3>
+
+    <p>Total Records: {{ insuranceService.getInsurances().length }}</p>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Insurance ID</th>
+            <th>Patient</th>
+            <th>Provider</th>
+            <th>Policy Number</th>
+            <th>Group Number</th>
+            <th>Plan</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let insurance of insuranceService.getInsurances()">
+            <td>INS-{{ insurance.id }}</td>
+            <td>{{ insurance.patientName }}</td>
+            <td>{{ insurance.providerName }}</td>
+            <td>{{ insurance.policyNumber }}</td>
+            <td>{{ insurance.groupNumber || '-' }}</td>
+            <td>{{ insurance.planType }}</td>
+            <td>{{ insurance.startDate }}</td>
+            <td>{{ insurance.endDate }}</td>
+
+            <td>
+              <button type="button" class="delete-btn" (click)="deleteInsurance(insurance.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="insuranceService.getInsurances().length === 0">
+            <td colspan="9" class="no-data">No insurance records found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<div class="eligibility-container">
+  <div class="page-heading">
+    <h2>Eligibility & Benefits</h2>
+    <p>Check patient insurance eligibility and benefits</p>
+  </div>
+
+  <!-- Eligibility Form -->
+
+  <div class="form-card">
+    <h3>Check Eligibility</h3>
+
+    <form (ngSubmit)="addEligibility()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Select Insurance Policy</label>
+
+          <select name="insuranceId" [(ngModel)]="insuranceId" required>
+            <option [ngValue]="null">Select Insurance</option>
+
+            <option
+              *ngFor="let insurance of insuranceService.getInsurances()"
+              [ngValue]="insurance.id"
+            >
+              {{ insurance.patientName }} -
+              {{ insurance.providerName }}
+              (INS-{{ insurance.id }})
+            </option>
+          </select>
+
+          <small *ngIf="insuranceService.getInsurances().length === 0">
+            Please add insurance details first.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label>Service Type</label>
+
+          <select name="serviceType" [(ngModel)]="serviceType">
+            <option value="Office Visit">Office Visit</option>
+            <option value="Emergency">Emergency</option>
+            <option value="Surgery">Surgery</option>
+            <option value="Laboratory">Laboratory</option>
+            <option value="Radiology">Radiology</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Request Date</label>
+
+          <input type="date" name="requestDate" [(ngModel)]="requestDate" required />
+        </div>
+
+        <div class="form-group">
+          <label>Eligibility Status</label>
+
+          <select name="status" [(ngModel)]="status">
+            <option value="Pending">Pending</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Copay ($)</label>
+
+          <input type="number" name="copay" [(ngModel)]="copay" min="0" />
+        </div>
+
+        <div class="form-group">
+          <label>Deductible ($)</label>
+
+          <input type="number" name="deductible" [(ngModel)]="deductible" min="0" />
+        </div>
+
+        <div class="form-group full-width">
+          <label>Notes</label>
+
+          <textarea
+            name="notes"
+            [(ngModel)]="notes"
+            rows="3"
+            placeholder="Enter eligibility notes"
+          ></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Save Eligibility</button>
+    </form>
+  </div>
+
+  <!-- Eligibility Records -->
+
+  <div class="table-card">
+    <h3>Eligibility Records</h3>
+
+    <p>
+      Total Records:
+      {{ eligibilityService.getTotalEligibility() }}
+    </p>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Eligibility ID</th>
+            <th>Patient</th>
+            <th>Insurance Provider</th>
+            <th>Policy Number</th>
+            <th>Service</th>
+            <th>Request Date</th>
+            <th>Status</th>
+            <th>Copay</th>
+            <th>Deductible</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let record of eligibilityService.getEligibilities()">
+            <td>ELG-{{ record.id }}</td>
+            <td>{{ record.patientName }}</td>
+            <td>{{ record.providerName }}</td>
+            <td>{{ record.policyNumber }}</td>
+            <td>{{ record.serviceType }}</td>
+            <td>{{ record.requestDate }}</td>
+            <td>{{ record.status }}</td>
+            <td>${{ record.copay }}</td>
+            <td>${{ record.deductible }}</td>
+
+            <td>
+              <button type="button" class="delete-btn" (click)="deleteEligibility(record.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="eligibilityService.getEligibilities().length === 0">
+            <td colspan="10" class="no-data">No eligibility records found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

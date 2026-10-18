@@ -1,0 +1,179 @@
+<div class="authorization-container">
+  <div class="page-heading">
+    <h2>Authorization & Referral</h2>
+    <p>Manage insurance authorization and referral requests</p>
+  </div>
+
+  <!-- Authorization Form -->
+
+  <div class="form-card">
+    <h3>New Authorization Request</h3>
+
+    <form (ngSubmit)="addAuthorization()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Select Patient</label>
+
+          <select
+            name="patientId"
+            [(ngModel)]="patientId"
+            (ngModelChange)="insuranceId = null"
+            required
+          >
+            <option [ngValue]="null">Select Patient</option>
+
+            <option *ngFor="let patient of patientService.getPatients()" [ngValue]="patient.id">
+              {{ patient.firstName }} {{ patient.lastName }} (PT-{{ patient.id }})
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Select Insurance</label>
+
+          <select name="insuranceId" [(ngModel)]="insuranceId" required [disabled]="!patientId">
+            <option [ngValue]="null">Select Insurance</option>
+
+            <option *ngFor="let insurance of getPatientInsurances()" [ngValue]="insurance.id">
+              {{ insurance.providerName }} -
+              {{ insurance.policyNumber }}
+            </option>
+          </select>
+
+          <small *ngIf="patientId && getPatientInsurances().length === 0">
+            No insurance found for this patient.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label>Service Type</label>
+
+          <select name="serviceType" [(ngModel)]="serviceType">
+            <option value="Surgery">Surgery</option>
+            <option value="Specialist Visit">Specialist Visit</option>
+            <option value="MRI">MRI</option>
+            <option value="CT Scan">CT Scan</option>
+            <option value="Hospitalization">Hospitalization</option>
+            <option value="Therapy">Therapy</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Procedure Name</label>
+
+          <input
+            type="text"
+            name="procedureName"
+            [(ngModel)]="procedureName"
+            placeholder="Enter procedure name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Request Date</label>
+
+          <input type="date" name="requestDate" [(ngModel)]="requestDate" required />
+        </div>
+
+        <div class="form-group">
+          <label>Referring Provider</label>
+
+          <input
+            type="text"
+            name="providerName"
+            [(ngModel)]="providerName"
+            placeholder="Enter provider name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Referral Required</label>
+
+          <select name="referralRequired" [(ngModel)]="referralRequired">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Authorization Status</label>
+
+          <select name="status" [(ngModel)]="status">
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Denied">Denied</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>Notes</label>
+
+          <textarea
+            name="notes"
+            [(ngModel)]="notes"
+            rows="3"
+            placeholder="Enter additional notes"
+          ></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Save Authorization</button>
+    </form>
+  </div>
+
+  <!-- Authorization Records -->
+
+  <div class="table-card">
+    <h3>Authorization Records</h3>
+
+    <p>
+      Total Requests:
+      {{ authorizationService.getTotalAuthorizations() }}
+    </p>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Auth ID</th>
+            <th>Patient</th>
+            <th>Insurance</th>
+            <th>Procedure</th>
+            <th>Service</th>
+            <th>Request Date</th>
+            <th>Provider</th>
+            <th>Referral</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let auth of authorizationService.getAuthorizations()">
+            <td>AUTH-{{ auth.id }}</td>
+            <td>{{ auth.patientName }}</td>
+            <td>{{ auth.insuranceProvider }}</td>
+            <td>{{ auth.procedureName }}</td>
+            <td>{{ auth.serviceType }}</td>
+            <td>{{ auth.requestDate }}</td>
+            <td>{{ auth.providerName }}</td>
+            <td>{{ auth.referralRequired }}</td>
+            <td>{{ auth.status }}</td>
+
+            <td>
+              <button type="button" class="delete-btn" (click)="deleteAuthorization(auth.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="authorizationService.getAuthorizations().length === 0">
+            <td colspan="10" class="no-data">No authorization records found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

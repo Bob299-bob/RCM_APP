@@ -1,0 +1,157 @@
+<div class="container-fluid">
+  <h2>Adjudication & Claim Status</h2>
+  <p>Track insurance payer decisions and claim payment details.</p>
+
+  <div class="row mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Total Records</h6>
+        <h3>{{ adjudicationService.getAdjudications().length }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Approved Claims</h6>
+        <h3>{{ adjudicationService.getApprovedClaims() }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Denied Claims</h6>
+        <h3>{{ adjudicationService.getDeniedClaims() }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-4 mb-4">
+    <h4>Add Payer Response</h4>
+
+    <form (ngSubmit)="addAdjudication()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Select Submission</label>
+
+          <select class="form-select" name="submissionId" [(ngModel)]="submissionId" required>
+            <option [ngValue]="null">Select Submission</option>
+
+            <option
+              *ngFor="let submission of submissionService.getSubmissions()"
+              [ngValue]="submission.id"
+            >
+              {{ submission.claimNumber }} - {{ submission.patientName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Payer Decision</label>
+
+          <select class="form-select" name="status" [(ngModel)]="status">
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Denied</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Approved Amount (₹)</label>
+
+          <input
+            type="number"
+            class="form-control"
+            name="approvedAmount"
+            [(ngModel)]="approvedAmount"
+            min="0"
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Adjustment Amount (₹)</label>
+
+          <input
+            type="number"
+            class="form-control"
+            name="adjustmentAmount"
+            [(ngModel)]="adjustmentAmount"
+            min="0"
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Response Date</label>
+
+          <input
+            type="date"
+            class="form-control"
+            name="responseDate"
+            [(ngModel)]="responseDate"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3" *ngIf="status === 'Denied'">
+          <label class="form-label">Denial Reason</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="denialReason"
+            [(ngModel)]="denialReason"
+            placeholder="Enter denial reason"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save Payer Response</button>
+    </form>
+  </div>
+
+  <div class="card p-4">
+    <h4>Adjudication Records</h4>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Claim No.</th>
+            <th>Patient</th>
+            <th>Payer</th>
+            <th>Claim Amount</th>
+            <th>Approved Amount</th>
+            <th>Adjustment</th>
+            <th>Status</th>
+            <th>Response Date</th>
+            <th>Denial Reason</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let record of adjudicationService.getAdjudications()">
+            <td>{{ record.claimNumber }}</td>
+            <td>{{ record.patientName }}</td>
+            <td>{{ record.payerName }}</td>
+            <td>₹{{ record.claimAmount }}</td>
+            <td>₹{{ record.approvedAmount }}</td>
+            <td>₹{{ record.adjustmentAmount }}</td>
+            <td>{{ record.status }}</td>
+            <td>{{ record.responseDate }}</td>
+            <td>{{ record.denialReason || '-' }}</td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteAdjudication(record.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="adjudicationService.getAdjudications().length === 0">
+            <td colspan="10" class="text-center">No adjudication records found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="container-fluid">
+  <h2>Claim Submission & Clearinghouse</h2>
+  <p>Submit validated claims to the clearinghouse and track submission records.</p>
+
+  <div class="card p-4 mb-4">
+    <h4>Submit Claim</h4>
+
+    <form (ngSubmit)="submitClaim()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Select Validated Claim</label>
+
+          <select class="form-select" name="claimId" [(ngModel)]="claimId" required>
+            <option [ngValue]="null">Select Claim</option>
+
+            <option *ngFor="let claim of getPassedClaims()" [ngValue]="claim.id">
+              {{ claim.claimNumber }} - {{ claim.patientName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Clearinghouse Name</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="clearinghouseName"
+            [(ngModel)]="clearinghouseName"
+            placeholder="Enter clearinghouse name"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Submission Date</label>
+
+          <input
+            type="date"
+            class="form-control"
+            name="submissionDate"
+            [(ngModel)]="submissionDate"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Submission Status</label>
+
+          <select class="form-select" name="status" [(ngModel)]="status">
+            <option>Submitted</option>
+            <option>Processing</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit Claim</button>
+    </form>
+  </div>
+
+  <div class="card p-4">
+    <h4>Submission Records</h4>
+
+    <p>
+      Total Submissions:
+      <strong>{{ submissionService.getSubmissions().length }}</strong>
+    </p>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Reference No.</th>
+            <th>Claim No.</th>
+            <th>Patient</th>
+            <th>Payer</th>
+            <th>Clearinghouse</th>
+            <th>Amount</th>
+            <th>Submission Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let submission of submissionService.getSubmissions()">
+            <td>{{ submission.referenceNumber }}</td>
+            <td>{{ submission.claimNumber }}</td>
+            <td>{{ submission.patientName }}</td>
+            <td>{{ submission.payerName }}</td>
+            <td>{{ submission.clearinghouseName }}</td>
+            <td>₹{{ submission.totalAmount }}</td>
+            <td>{{ submission.submissionDate }}</td>
+            <td>{{ submission.status }}</td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteSubmission(submission.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="submissionService.getSubmissions().length === 0">
+            <td colspan="9" class="text-center">No submission records found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

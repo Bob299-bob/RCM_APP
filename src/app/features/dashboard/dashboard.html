@@ -1,0 +1,27 @@
+<div class="dashboard-content">
+  <h2>Dashboard Overview</h2>
+
+  <p>Welcome to Healthcare Revenue Cycle Management</p>
+
+  <div class="dashboard-cards">
+    <div class="card">
+      <h4>Total Patients</h4>
+      <h2>{{ patientService.getPatients().length }}</h2>
+    </div>
+
+    <div class="card">
+      <h4>Total Claims</h4>
+      <h2>{{ claimService.getTotalClaims() }}</h2>
+    </div>
+
+    <div class="card">
+      <h4>Pending Claims</h4>
+      <h2>{{ claimService.getPendingClaims() }}</h2>
+    </div>
+
+    <div class="card">
+      <h4>Denied Claims</h4>
+      <h2>{{ claimService.getDeniedClaims() }}</h2>
+    </div>
+  </div>
+</div>

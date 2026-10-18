@@ -1,1 +1,266 @@
-/* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fb;
+  font-family: Arial, sans-serif;
+  color: #334155;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page-container {
+  width: 100%;
+  padding: 24px;
+  min-width: 0;
+}
+
+.page-heading {
+  margin-bottom: 24px;
+}
+
+.page-heading h2 {
+  color: #1e3a5f;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 7px;
+}
+
+.page-heading p {
+  color: #64748b;
+  margin: 0;
+}
+
+.form-card,
+.table-card,
+.content-card {
+  background: #fff;
+  border: 1px solid #e8edf5;
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, .05);
+}
+
+.form-card h3,
+.table-card h3,
+.content-card h3 {
+  color: #1e3a5f;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 20px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #e8edf5;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  min-height: 43px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  outline: none;
+  transition: .2s;
+}
+
+.form-group textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.submit-btn,
+.primary-btn {
+  background: #2563eb;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.submit-btn:hover,
+.primary-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.delete-btn,
+.danger-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.delete-btn:hover,
+.danger-btn:hover {
+  background: #dc2626;
+  color: #fff;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.summary-card {
+  background: #fff;
+  border: 1px solid #e8edf5;
+  border-left: 4px solid #2563eb;
+  border-radius: 10px;
+  padding: 19px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, .05);
+  transition: .2s;
+}
+
+.summary-card:hover {
+  transform: translateY(-3px);
+}
+
+.summary-card h5 {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.summary-card h3 {
+  color: #1e3a5f;
+  font-size: 26px;
+  margin: 0;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-card table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+}
+
+.table-card th {
+  background: #eef5ff;
+  color: #1e3a5f;
+  padding: 14px;
+  text-align: left;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.table-card td {
+  padding: 13px;
+  border-bottom: 1px solid #edf0f5;
+  color: #475569;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.table-card tbody tr:hover {
+  background: #f5f9ff;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+@media (max-width: 992px) {
+  .page-container {
+    padding: 16px;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .page-container {
+    padding: 12px;
+  }
+
+  .page-heading h2 {
+    font-size: 21px;
+  }
+
+  .form-card,
+  .table-card,
+  .content-card {
+    padding: 15px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full-width {
+    grid-column: auto;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-btn,
+  .primary-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,288 @@
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  font-family: Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.patient-container {
+  width: 100%;
+  padding: 24px;
+  background: #f5f7fb;
+  min-height: calc(100vh - 70px);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Page Heading */
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.page-heading h2 {
+  color: #1e3a5f;
+  font-size: 27px;
+  font-weight: 700;
+  margin: 0 0 7px;
+}
+
+.page-heading p {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Registration Card */
+.form-card,
+.table-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 25px;
+  border: 1px solid #e8edf5;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+  transition: 0.3s ease;
+}
+
+.form-card:hover,
+.table-card:hover {
+  box-shadow: 0 7px 20px rgba(15, 23, 42, 0.08);
+}
+
+.form-card h3,
+.table-card h3 {
+  color: #1e3a5f;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e8edf5;
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.form-group textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Register Button */
+.submit-btn {
+  margin-top: 22px;
+  padding: 12px 25px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.submit-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.2);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Patient Table */
+.table-card > p {
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.table-card table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.table-card th {
+  background: #eef5ff;
+  color: #1e3a5f;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 15px 13px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table-card td {
+  color: #475569;
+  font-size: 13px;
+  padding: 14px 13px;
+  border-bottom: 1px solid #edf0f5;
+  white-space: nowrap;
+}
+
+.table-card tbody tr {
+  transition: background 0.2s ease;
+}
+
+.table-card tbody tr:hover {
+  background: #f5f9ff;
+}
+
+/* Delete Button */
+.delete-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 7px 13px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Empty Message */
+.no-data {
+  text-align: center;
+  color: #94a3b8 !important;
+  padding: 25px !important;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .patient-container {
+    padding: 18px;
+  }
+
+  .form-card,
+  .table-card {
+    padding: 20px;
+  }
+
+  .page-heading h2 {
+    font-size: 24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .patient-container {
+    padding: 12px;
+  }
+
+  .page-heading h2 {
+    font-size: 21px;
+  }
+
+  .form-card,
+  .table-card {
+    padding: 15px;
+    border-radius: 9px;
+  }
+
+  .form-card h3,
+  .table-card h3 {
+    font-size: 17px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .form-group.full-width {
+    grid-column: auto;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+
+  .table-card table {
+    min-width: 750px;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

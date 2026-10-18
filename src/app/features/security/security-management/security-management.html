@@ -1,0 +1,173 @@
+<div class="container-fluid">
+  <div class="mb-4">
+    <h2>HIPAA Compliance, Audit & Security</h2>
+    <p class="text-muted">Manage demo users, review audit logs and track security alerts.</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card summary-card">
+        <h6>Total Users</h6>
+        <h3>{{ securityService.getUsers().length }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card summary-card">
+        <h6>Audit Logs</h6>
+        <h3>{{ securityService.getAuditLogs().length }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card summary-card">
+        <h6>Open Security Alerts</h6>
+        <h3>{{ openAlertsCount }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Management -->
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3">User Access Management</h5>
+
+    <form (ngSubmit)="addUser()">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="User Name"
+            name="name"
+            [(ngModel)]="name"
+            required
+          />
+        </div>
+
+        <div class="col-md-4">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email Address"
+            name="email"
+            [(ngModel)]="email"
+            required
+          />
+        </div>
+
+        <div class="col-md-3">
+          <select class="form-select" name="role" [(ngModel)]="role">
+            <option>Admin</option>
+            <option>Doctor</option>
+            <option>Billing Staff</option>
+            <option>Medical Coder</option>
+          </select>
+        </div>
+
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-primary w-100">Add</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="table-responsive mt-4">
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let user of securityService.getUsers()">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Audit Logs -->
+  <div class="card p-4 mb-4">
+    <h5 class="mb-3">Audit Logs</h5>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>User</th>
+            <th>Action</th>
+            <th>Details</th>
+            <th>Date & Time</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let log of securityService.getAuditLogs()">
+            <td>{{ log.user }}</td>
+            <td>{{ log.action }}</td>
+            <td>{{ log.details }}</td>
+            <td>{{ log.date }}</td>
+          </tr>
+
+          <tr *ngIf="securityService.getAuditLogs().length === 0">
+            <td colspan="4" class="text-center">No audit logs found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Security Alerts -->
+  <div class="card p-4">
+    <h5 class="mb-3">Security Alerts</h5>
+
+    <form (ngSubmit)="addAlert()" class="mb-3">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter security alert"
+          name="alertMessage"
+          [(ngModel)]="alertMessage"
+        />
+
+        <button class="btn btn-primary" type="submit">Add Alert</button>
+      </div>
+    </form>
+
+    <div
+      class="alert alert-light border d-flex justify-content-between align-items-center"
+      *ngFor="let alert of securityService.getAlerts()"
+    >
+      <div>
+        <strong>{{ alert.message }}</strong>
+        <div class="small text-muted">{{ alert.date }}</div>
+        <span class="badge bg-warning text-dark">
+          {{ alert.status }}
+        </span>
+      </div>
+
+      <button
+        *ngIf="alert.status === 'Open'"
+        class="btn btn-success btn-sm"
+        (click)="resolveAlert(alert.id)"
+      >
+        Resolve
+      </button>
+    </div>
+
+    <p *ngIf="securityService.getAlerts().length === 0" class="text-muted">
+      No security alerts found.
+    </p>
+  </div>
+</div>

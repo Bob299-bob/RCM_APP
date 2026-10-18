@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <h2>Claim Scrubbing & Validation</h2>
+  <p>Check claims for missing or incorrect information before submission.</p>
+
+  <div class="card p-4 mb-4">
+    <h4>Validate Claim</h4>
+
+    <form (ngSubmit)="validateClaim()">
+      <div class="mb-3">
+        <label class="form-label">Select Claim</label>
+
+        <select class="form-select" name="claimId" [(ngModel)]="claimId" required>
+          <option [ngValue]="null">Select Claim</option>
+
+          <option *ngFor="let claim of claimService.getClaims()" [ngValue]="claim.id">
+            {{ claim.claimNumber }} - {{ claim.patientName }}
+          </option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Validate Claim</button>
+    </form>
+  </div>
+
+  <div class="card p-4">
+    <h4>Validation Results</h4>
+
+    <p>
+      Total Validations:
+      <strong>{{ scrubbingService.getTotalResults() }}</strong>
+    </p>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Claim No.</th>
+            <th>Patient</th>
+            <th>Validation Date</th>
+            <th>Status</th>
+            <th>Errors</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let result of scrubbingService.getResults()">
+            <td>{{ result.claimNumber }}</td>
+            <td>{{ result.patientName }}</td>
+            <td>{{ result.validationDate }}</td>
+
+            <td>
+              <span
+                [class.text-success]="result.validationStatus === 'Passed'"
+                [class.text-danger]="result.validationStatus === 'Failed'"
+              >
+                {{ result.validationStatus }}
+              </span>
+            </td>
+
+            <td>
+              <span *ngIf="result.errors.length === 0"> No errors </span>
+
+              <ul *ngIf="result.errors.length > 0">
+                <li *ngFor="let error of result.errors">
+                  {{ error }}
+                </li>
+              </ul>
+            </td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteResult(result.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="scrubbingService.getResults().length === 0">
+            <td colspan="6" class="text-center">No validation records found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

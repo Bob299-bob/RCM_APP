@@ -1,0 +1,141 @@
+<div class="container-fluid">
+  <h2>Patient Billing & Responsibility</h2>
+  <p>Manage patient bills and outstanding balances.</p>
+
+  <!-- Summary Cards -->
+
+  <div class="row mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Total Bills</h6>
+        <h3>{{ billingService.getTotalBills() }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Total Patient Responsibility</h6>
+        <h3>₹{{ billingService.getTotalPatientResponsibility() }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Approved Claims</h6>
+        <h3>{{ getApprovedRecords().length }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Billing Form -->
+
+  <div class="card p-4 mb-4">
+    <h4>Create Patient Bill</h4>
+
+    <form (ngSubmit)="addBill()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Select Approved Claim</label>
+
+          <select class="form-select" name="adjudicationId" [(ngModel)]="adjudicationId" required>
+            <option [ngValue]="null">Select Claim</option>
+
+            <option *ngFor="let record of getApprovedRecords()" [ngValue]="record.id">
+              {{ record.claimNumber }} - {{ record.patientName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Insurance Paid Amount (₹)</label>
+
+          <input type="number" class="form-control" [value]="getInsurancePaidAmount()" readonly />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Patient Responsibility (₹)</label>
+
+          <input
+            type="number"
+            class="form-control"
+            name="patientResponsibility"
+            [(ngModel)]="patientResponsibility"
+            min="0"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Bill Date</label>
+
+          <input type="date" class="form-control" name="billDate" [(ngModel)]="billDate" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Due Date</label>
+
+          <input type="date" class="form-control" name="dueDate" [(ngModel)]="dueDate" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Payment Status</label>
+
+          <select class="form-select" name="paymentStatus" [(ngModel)]="paymentStatus">
+            <option>Unpaid</option>
+            <option>Partially Paid</option>
+            <option>Paid</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Patient Bill</button>
+    </form>
+  </div>
+
+  <!-- Billing Records -->
+
+  <div class="card p-4">
+    <h4>Patient Billing Records</h4>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Claim No.</th>
+            <th>Patient</th>
+            <th>Payer</th>
+            <th>Claim Amount</th>
+            <th>Insurance Paid</th>
+            <th>Patient Responsibility</th>
+            <th>Bill Date</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let bill of billingService.getBills()">
+            <td>{{ bill.claimNumber }}</td>
+            <td>{{ bill.patientName }}</td>
+            <td>{{ bill.payerName }}</td>
+            <td>₹{{ bill.claimAmount }}</td>
+            <td>₹{{ bill.insurancePaid }}</td>
+            <td>₹{{ bill.patientResponsibility }}</td>
+            <td>{{ bill.billDate }}</td>
+            <td>{{ bill.dueDate }}</td>
+            <td>{{ bill.paymentStatus }}</td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteBill(bill.id)">Delete</button>
+            </td>
+          </tr>
+
+          <tr *ngIf="billingService.getBills().length === 0">
+            <td colspan="10" class="text-center">No billing records found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

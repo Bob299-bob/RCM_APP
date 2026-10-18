@@ -1,0 +1,12 @@
+
+:host { display: block; }
+.eligibility-container { padding: 24px; }
+.eligibility-container .form-card, .eligibility-container .result-card, .eligibility-container .table-card { background: white; padding: 22px; border-radius: 12px; margin-bottom: 22px; box-shadow: 0 4px 14px #0f172a0d; }
+.eligibility-container h2, .eligibility-container h3 { color: #1e3a5f; }
+.eligibility-container label { display: block; font-weight: 600; margin-bottom: 7px; }
+.eligibility-container input, .eligibility-container select { width: 100%; padding: 11px; border: 1px solid #cbd5e1; border-radius: 8px; }
+.eligibility-container button { padding: 10px 18px; border: 0; border-radius: 8px; background: #2563eb; color: white; }
+.eligibility-container table { width: 100%; min-width: 750px; border-collapse: collapse; }
+.eligibility-container th { background: #eef5ff; padding: 13px; text-align: left; }
+.eligibility-container td { padding: 13px; border-bottom: 1px solid #edf0f5; }
+@media(max-width:768px) { .eligibility-container { padding: 12px; } }

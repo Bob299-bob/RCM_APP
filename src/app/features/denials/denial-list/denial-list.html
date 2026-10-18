@@ -1,0 +1,181 @@
+<div class="container-fluid">
+  <h2>Denial Management & Appeals</h2>
+  <p>Manage denied claims and track appeal progress.</p>
+
+  <!-- Summary Cards -->
+
+  <div class="row mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Total Denials</h6>
+        <h3>{{ denialService.getTotalDenials() }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Pending Appeals</h6>
+        <h3>{{ denialService.getPendingAppeals() }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Denied Claims Available</h6>
+        <h3>{{ getDeniedRecords().length }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Denial Form -->
+
+  <div class="card p-4 mb-4">
+    <h4>Add Denial Record</h4>
+
+    <form (ngSubmit)="addDenial()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Select Denied Claim</label>
+
+          <select class="form-select" name="adjudicationId" [(ngModel)]="adjudicationId" required>
+            <option [ngValue]="null">Select Claim</option>
+
+            <option *ngFor="let record of getDeniedRecords()" [ngValue]="record.id">
+              {{ record.claimNumber }} - {{ record.patientName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Denial Code</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="denialCode"
+            [(ngModel)]="denialCode"
+            placeholder="Example: CO-16"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Denial Reason</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="denialReason"
+            [(ngModel)]="denialReason"
+            placeholder="Enter denial reason"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Denial Date</label>
+
+          <input
+            type="date"
+            class="form-control"
+            name="denialDate"
+            [(ngModel)]="denialDate"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Appeal Status</label>
+
+          <select class="form-select" name="appealStatus" [(ngModel)]="appealStatus">
+            <option>Pending</option>
+            <option>Submitted</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Appeal Date</label>
+
+          <input type="date" class="form-control" name="appealDate" [(ngModel)]="appealDate" />
+        </div>
+
+        <div class="col-12 mb-3">
+          <label class="form-label">Appeal Notes</label>
+
+          <textarea
+            class="form-control"
+            name="appealNotes"
+            [(ngModel)]="appealNotes"
+            rows="3"
+            placeholder="Enter appeal details"
+          >
+          </textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save Denial Record</button>
+    </form>
+  </div>
+
+  <!-- Denial Records -->
+
+  <div class="card p-4">
+    <h4>Denial Records</h4>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Claim No.</th>
+            <th>Patient</th>
+            <th>Payer</th>
+            <th>Amount</th>
+            <th>Denial Code</th>
+            <th>Denial Reason</th>
+            <th>Denial Date</th>
+            <th>Appeal Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let denial of denialService.getDenials()">
+            <td>{{ denial.claimNumber }}</td>
+            <td>{{ denial.patientName }}</td>
+            <td>{{ denial.payerName }}</td>
+            <td>₹{{ denial.claimAmount }}</td>
+            <td>{{ denial.denialCode }}</td>
+            <td>{{ denial.denialReason }}</td>
+            <td>{{ denial.denialDate }}</td>
+
+            <td>
+              <select
+                class="form-select form-select-sm"
+                [ngModel]="denial.appealStatus"
+                (ngModelChange)="updateAppeal(denial.id, $event)"
+                [name]="'appealStatus' + denial.id"
+              >
+                <option>Pending</option>
+                <option>Submitted</option>
+                <option>Approved</option>
+                <option>Rejected</option>
+              </select>
+            </td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteDenial(denial.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="denialService.getDenials().length === 0">
+            <td colspan="9" class="text-center">No denial records found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

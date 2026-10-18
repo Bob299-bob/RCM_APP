@@ -1,0 +1,154 @@
+<div class="container-fluid">
+  <h2>Patient Encounter Management</h2>
+  <p>Manage patient visits and clinical encounter details.</p>
+
+  <!-- Encounter Form -->
+
+  <div class="card p-4 mb-4">
+    <h4>Create New Encounter</h4>
+
+    <form (ngSubmit)="addEncounter()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Select Patient</label>
+
+          <select class="form-select" name="patientId" [(ngModel)]="patientId" required>
+            <option [ngValue]="null">Select Patient</option>
+
+            <option *ngFor="let patient of patientService.getPatients()" [ngValue]="patient.id">
+              {{ patient.firstName }} {{ patient.lastName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Provider Name</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="providerName"
+            [(ngModel)]="providerName"
+            placeholder="Enter provider name"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Encounter Date</label>
+
+          <input
+            type="date"
+            class="form-control"
+            name="encounterDate"
+            [(ngModel)]="encounterDate"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Visit Type</label>
+
+          <select class="form-select" name="visitType" [(ngModel)]="visitType">
+            <option>Office Visit</option>
+            <option>Emergency Visit</option>
+            <option>Follow-up Visit</option>
+            <option>Telehealth</option>
+            <option>Inpatient Visit</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Diagnosis</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="diagnosis"
+            [(ngModel)]="diagnosis"
+            placeholder="Enter diagnosis"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Encounter Status</label>
+
+          <select class="form-select" name="status" [(ngModel)]="status">
+            <option>Scheduled</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+
+        <div class="col-12 mb-3">
+          <label class="form-label">Clinical Notes</label>
+
+          <textarea
+            class="form-control"
+            name="notes"
+            [(ngModel)]="notes"
+            rows="3"
+            placeholder="Enter clinical notes"
+          >
+          </textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Encounter</button>
+
+      <button type="button" class="btn btn-secondary ms-2" (click)="clearForm()">Clear</button>
+    </form>
+  </div>
+
+  <!-- Encounter List -->
+
+  <div class="card p-4">
+    <h4>Registered Encounters</h4>
+
+    <p>
+      Total Encounters:
+      <strong>{{ encounterService.getEncounters().length }}</strong>
+    </p>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Encounter ID</th>
+            <th>Patient Name</th>
+            <th>Provider</th>
+            <th>Date</th>
+            <th>Visit Type</th>
+            <th>Diagnosis</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let encounter of encounterService.getEncounters()">
+            <td>ENC-{{ encounter.id }}</td>
+            <td>{{ encounter.patientName }}</td>
+            <td>{{ encounter.providerName }}</td>
+            <td>{{ encounter.encounterDate }}</td>
+            <td>{{ encounter.visitType }}</td>
+            <td>{{ encounter.diagnosis }}</td>
+            <td>{{ encounter.status }}</td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteEncounter(encounter.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="encounterService.getEncounters().length === 0">
+            <td colspan="8" class="text-center">No encounters found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

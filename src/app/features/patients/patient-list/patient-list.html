@@ -1,0 +1,137 @@
+<div class="patient-container">
+  <div class="page-heading">
+    <div>
+      <h2>Patient Registration</h2>
+      <p>Register and manage patient information</p>
+    </div>
+  </div>
+
+  <!-- Registration Form -->
+
+  <div class="form-card">
+    <h3>Patient Details</h3>
+
+    <form (ngSubmit)="addPatient()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            [(ngModel)]="firstName"
+            placeholder="Enter first name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            [(ngModel)]="lastName"
+            placeholder="Enter last name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" name="dateOfBirth" [(ngModel)]="dateOfBirth" required />
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select name="gender" [(ngModel)]="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" [(ngModel)]="email" placeholder="Enter email" required />
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input
+            type="tel"
+            name="phone"
+            [(ngModel)]="phone"
+            placeholder="Enter phone number"
+            required
+          />
+        </div>
+
+        <div class="form-group full-width">
+          <label>Address</label>
+          <textarea
+            name="address"
+            [(ngModel)]="address"
+            placeholder="Enter patient address"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Register Patient</button>
+    </form>
+  </div>
+
+  <!-- Patient Table -->
+
+  <div class="table-card">
+    <h3>Registered Patients</h3>
+
+    <p>Total Patients: {{ patientService.getPatients().length }}</p>
+
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Patient ID</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let patient of patientService.getPatients()">
+            <td>PT-{{ patient.id }}</td>
+
+            <td>
+              {{ patient.firstName }}
+              {{ patient.lastName }}
+            </td>
+
+            <td>{{ patient.dateOfBirth }}</td>
+
+            <td>{{ patient.gender }}</td>
+
+            <td>{{ patient.email }}</td>
+
+            <td>{{ patient.phone }}</td>
+
+            <td>
+              <button class="delete-btn" type="button" (click)="deletePatient(patient.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="patientService.getPatients().length === 0">
+            <td colspan="7" class="no-data">No patients registered yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

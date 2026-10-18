@@ -1,0 +1,13 @@
+
+:host { display: block; }
+.insurance-container { padding: 24px; }
+.insurance-form, .insurance-table, .form-card, .table-card { background: white; padding: 22px; border-radius: 12px; margin-bottom: 22px; box-shadow: 0 4px 14px #0f172a0d; }
+.insurance-container h2, .insurance-container h3 { color: #1e3a5f; }
+.insurance-container label { display: block; font-weight: 600; margin: 10px 0 7px; }
+.insurance-container input, .insurance-container select, .insurance-container textarea { width: 100%; padding: 11px; border: 1px solid #cbd5e1; border-radius: 8px; }
+.insurance-container button { margin-top: 14px; }
+.insurance-container table { width: 100%; min-width: 750px; border-collapse: collapse; }
+.insurance-container th { background: #eef5ff; color: #1e3a5f; text-align: left; padding: 13px; }
+.insurance-container td { padding: 13px; border-bottom: 1px solid #edf0f5; }
+.insurance-container tr:hover { background: #f5f9ff; }
+@media(max-width:768px) { .insurance-container { padding: 12px; } .insurance-form, .insurance-table { padding: 15px; } }

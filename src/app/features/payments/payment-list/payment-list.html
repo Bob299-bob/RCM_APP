@@ -1,0 +1,175 @@
+<div class="container-fluid">
+  <h2>Payment Posting & ERA/EOB</h2>
+  <p>Record insurance payments and manage remittance details.</p>
+
+  <!-- Summary -->
+
+  <div class="row mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Total Payment Records</h6>
+        <h3>{{ paymentService.getPayments().length }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Total Payments Received</h6>
+        <h3>₹{{ paymentService.getTotalPayments() }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3">
+        <h6>Approved Claims</h6>
+        <h3>{{ getApprovedRecords().length }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Form -->
+
+  <div class="card p-4 mb-4">
+    <h4>Post Insurance Payment</h4>
+
+    <form (ngSubmit)="addPayment()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Select Approved Claim</label>
+
+          <select class="form-select" name="adjudicationId" [(ngModel)]="adjudicationId" required>
+            <option [ngValue]="null">Select Claim</option>
+
+            <option *ngFor="let record of getApprovedRecords()" [ngValue]="record.id">
+              {{ record.claimNumber }} - {{ record.patientName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Payment Amount (₹)</label>
+
+          <input
+            type="number"
+            class="form-control"
+            name="paidAmount"
+            [(ngModel)]="paidAmount"
+            min="1"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Adjustment Amount (₹)</label>
+
+          <input
+            type="number"
+            class="form-control"
+            name="adjustmentAmount"
+            [(ngModel)]="adjustmentAmount"
+            min="0"
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Payment Date</label>
+
+          <input
+            type="date"
+            class="form-control"
+            name="paymentDate"
+            [(ngModel)]="paymentDate"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Payment Method</label>
+
+          <select class="form-select" name="paymentMethod" [(ngModel)]="paymentMethod">
+            <option value="EFT">EFT</option>
+            <option value="Check">Check</option>
+            <option value="Virtual Card">Virtual Card</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Check Number</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="checkNumber"
+            [(ngModel)]="checkNumber"
+            placeholder="Enter check number"
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">ERA Reference Number</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="eraNumber"
+            [(ngModel)]="eraNumber"
+            placeholder="Enter ERA reference"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Post Payment</button>
+    </form>
+  </div>
+
+  <!-- Payment Records -->
+
+  <div class="card p-4">
+    <h4>Payment Records</h4>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Claim No.</th>
+            <th>Patient</th>
+            <th>Payer</th>
+            <th>Claim Amount</th>
+            <th>Approved Amount</th>
+            <th>Paid Amount</th>
+            <th>Adjustment</th>
+            <th>Payment Date</th>
+            <th>Method</th>
+            <th>ERA Reference</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let payment of paymentService.getPayments()">
+            <td>{{ payment.claimNumber }}</td>
+            <td>{{ payment.patientName }}</td>
+            <td>{{ payment.payerName }}</td>
+            <td>₹{{ payment.claimAmount }}</td>
+            <td>₹{{ payment.approvedAmount }}</td>
+            <td>₹{{ payment.paidAmount }}</td>
+            <td>₹{{ payment.adjustmentAmount }}</td>
+            <td>{{ payment.paymentDate }}</td>
+            <td>{{ payment.paymentMethod }}</td>
+            <td>{{ payment.eraNumber || '-' }}</td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deletePayment(payment.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="paymentService.getPayments().length === 0">
+            <td colspan="11" class="text-center">No payment records found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

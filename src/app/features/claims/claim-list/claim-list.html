@@ -1,0 +1,149 @@
+<div class="container-fluid">
+  <h2>Claim Creation & Management</h2>
+  <p>Create and manage patient insurance claims.</p>
+
+  <!-- Claim Form -->
+
+  <div class="card p-4 mb-4">
+    <h4>Create New Claim</h4>
+
+    <form (ngSubmit)="addClaim()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>Medical Coding Record</label>
+
+          <select class="form-select" name="codingId" [(ngModel)]="codingId" required>
+            <option [ngValue]="null">Select Coding Record</option>
+
+            <option *ngFor="let coding of codingService.getCodings()" [ngValue]="coding.id">
+              COD-{{ coding.id }} - {{ coding.patientName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label>Insurance Payer</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="payerName"
+            [(ngModel)]="payerName"
+            placeholder="Enter insurance company"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label>Claim Date</label>
+
+          <input
+            type="date"
+            class="form-control"
+            name="claimDate"
+            [(ngModel)]="claimDate"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label>Claim Status</label>
+
+          <select class="form-select" name="status" [(ngModel)]="status">
+            <option>Draft</option>
+            <option>Pending</option>
+            <option>Submitted</option>
+            <option>Approved</option>
+            <option>Denied</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Selected Coding Details -->
+
+      <div *ngIf="getSelectedCoding() as coding" class="alert alert-light border">
+        <h5>Selected Coding Details</h5>
+
+        <p><strong>Patient:</strong> {{ coding.patientName }}</p>
+
+        <p><strong>Diagnosis:</strong> {{ coding.diagnosisName }}</p>
+
+        <p><strong>ICD-10:</strong> {{ coding.icdCode }}</p>
+
+        <p><strong>Procedure:</strong> {{ coding.procedureName }}</p>
+
+        <p><strong>CPT Code:</strong> {{ coding.cptCode }}</p>
+
+        <p>
+          <strong>Claim Amount:</strong>
+          ₹{{ getSelectedCharge()?.totalAmount }}
+        </p>
+      </div>
+
+      <div class="mb-3">
+        <label>Notes</label>
+
+        <textarea
+          class="form-control"
+          name="notes"
+          [(ngModel)]="notes"
+          rows="3"
+          placeholder="Enter claim notes"
+        >
+        </textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Create Claim</button>
+    </form>
+  </div>
+
+  <!-- Claim List -->
+
+  <div class="card p-4">
+    <h4>Registered Claims</h4>
+
+    <p>
+      Total Claims:
+      <strong>{{ claimService.getTotalClaims() }}</strong>
+    </p>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Claim No.</th>
+            <th>Patient</th>
+            <th>Diagnosis</th>
+            <th>ICD Code</th>
+            <th>Payer</th>
+            <th>Amount</th>
+            <th>Claim Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let claim of claimService.getClaims()">
+            <td>{{ claim.claimNumber }}</td>
+            <td>{{ claim.patientName }}</td>
+            <td>{{ claim.diagnosis }}</td>
+            <td>{{ claim.icdCode }}</td>
+            <td>{{ claim.payerName }}</td>
+            <td>₹{{ claim.totalAmount }}</td>
+            <td>{{ claim.claimDate }}</td>
+            <td>{{ claim.status }}</td>
+
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="deleteClaim(claim.id)">Delete</button>
+            </td>
+          </tr>
+
+          <tr *ngIf="claimService.getClaims().length === 0">
+            <td colspan="9" class="text-center">No claims found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

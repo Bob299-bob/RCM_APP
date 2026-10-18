@@ -1,0 +1,249 @@
+
+/* Main Container */
+.container-fluid {
+  padding: 20px;
+  color: #263247;
+}
+
+/* Page Heading */
+.container-fluid h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #243b63;
+  margin-bottom: 8px;
+}
+
+.container-fluid .text-muted {
+  color: #718096 !important;
+}
+
+/* Summary Cards */
+.summary-card {
+  height: 100%;
+  padding: 22px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.summary-card h6 {
+  color: #718096;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.summary-card h3 {
+  color: #2563eb;
+  font-size: 27px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+/* Main Cards */
+.container-fluid > .card {
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  margin-bottom: 25px;
+}
+
+.container-fluid .card h5 {
+  color: #243b63;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* Form Controls */
+.container-fluid .form-control,
+.container-fluid .form-select {
+  min-height: 43px;
+  border: 1px solid #d7deea;
+  border-radius: 7px;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+.container-fluid .form-control:focus,
+.container-fluid .form-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+/* Buttons */
+.container-fluid .btn-primary {
+  background: #2563eb;
+  border: none;
+  border-radius: 7px;
+  padding: 9px 18px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.container-fluid .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.container-fluid .btn-danger {
+  background: #dc3545;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.container-fluid .btn-danger:hover {
+  background: #b02a37;
+}
+
+.container-fluid .btn-success {
+  background: #16845b;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.container-fluid .btn-success:hover {
+  background: #116b49;
+}
+
+/* Tables */
+.container-fluid .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.container-fluid .table {
+  min-width: 650px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+.container-fluid .table thead th {
+  background: #edf3ff;
+  color: #243b63;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 13px 12px;
+}
+
+.container-fluid .table tbody td {
+  padding: 12px;
+  color: #475467;
+}
+
+.container-fluid .table tbody tr:hover {
+  background: #f5f8ff;
+}
+
+/* Security Alerts */
+.container-fluid .alert-light {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 9px;
+  padding: 15px;
+  gap: 15px;
+}
+
+.container-fluid .alert-light strong {
+  color: #243b63;
+  font-size: 14px;
+}
+
+.container-fluid .alert-light .small {
+  margin-top: 5px;
+}
+
+.container-fluid .badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+
+/* Alert Form */
+.container-fluid .input-group {
+  gap: 10px;
+}
+
+.container-fluid .input-group .form-control {
+  border-radius: 7px !important;
+}
+
+.container-fluid .input-group .btn {
+  border-radius: 7px !important;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .container-fluid {
+    padding: 15px;
+  }
+
+  .container-fluid h2 {
+    font-size: 23px;
+  }
+
+  .summary-card {
+    padding: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .container-fluid {
+    padding: 10px;
+  }
+
+  .container-fluid h2 {
+    font-size: 20px;
+  }
+
+  .container-fluid p {
+    font-size: 13px;
+  }
+
+  .container-fluid > .card {
+    padding: 15px !important;
+  }
+
+  .container-fluid .card h5 {
+    font-size: 17px;
+  }
+
+  .summary-card {
+    padding: 17px;
+  }
+
+  .summary-card h3 {
+    font-size: 23px;
+  }
+
+  .container-fluid .table {
+    min-width: 600px;
+  }
+
+  .container-fluid .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container-fluid .input-group .btn {
+    width: 100%;
+  }
+
+  .container-fluid .alert-light {
+    align-items: flex-start !important;
+  }
+}
