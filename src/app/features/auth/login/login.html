@@ -1,10 +1,13 @@
+
 <div class="login-container">
   <div class="login-card">
-    <h1>Healthcare RCM</h1>
 
+    <h1>Healthcare RCM</h1>
     <p>Sign in to your account</p>
 
     <form (ngSubmit)="login()">
+
+      <!-- Email -->
       <label>Email Address</label>
 
       <input
@@ -12,9 +15,14 @@
         name="email"
         placeholder="Enter your email"
         [(ngModel)]="email"
-        required
+        class="form-control"
       />
 
+      <div class="text-danger small mt-1" *ngIf="errors['email']">
+        {{ errors['email'] }}
+      </div>
+
+      <!-- Password -->
       <label>Password</label>
 
       <input
@@ -22,12 +30,24 @@
         name="password"
         placeholder="Enter your password"
         [(ngModel)]="password"
-        required
+        class="form-control"
       />
 
-      <button type="submit">Login</button>
+      <div class="text-danger small mt-1" *ngIf="errors['password']">
+        {{ errors['password'] }}
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit">
+        Login
+      </button>
+
+      <!-- Success Message -->
+      <div *ngIf="message" class="alert alert-success mt-3">
+        {{ message }}
+      </div>
+
     </form>
 
-    <p class="message">{{ message }}</p>
   </div>
 </div>
